@@ -6,16 +6,22 @@ import { AppComponent } from './app.component';
 import { ListProductComponent } from './components/list-product/list-product.component';
 import { ListClientComponent } from './components/list-client/list-client.component';
 import { HttpClientModule } from '@angular/common/http';
+import { RegisterProductComponent } from './components/register-product/register-product.component';
+import { RegisterClientComponent } from './components/register-client/register-client.component';
+import { FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
     ListProductComponent,
-    ListClientComponent
+    ListClientComponent,
+    RegisterProductComponent,
+    RegisterClientComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

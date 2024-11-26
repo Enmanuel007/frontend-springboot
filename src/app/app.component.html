@@ -1,19 +1,32 @@
-<h1 class="text-center">{{ title }}</h1>
+<h2>{{title}}</h2>
 
 <div class="main">
   <div class="tables-container">
+
     <!-- Contenedor de la Tabla de Productos -->
     <div class="table-section">
       <nav class="navbar navbar-expand-sm bg-dark navbar-dark text-white">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a routerLink="products" routerLinkActive="active" class="nav-link">
+            <a
+              [routerLink]="[{ outlets: { productSection: ['products'] } }]"
+              routerLinkActive="active"
+              class="nav-link">
               Lista de Productos
+            </a>
+          </li>
+          <li class="nav-item">
+            <a
+              [routerLink]="[{ outlets: { productSection: ['register-product'] } }]"
+              routerLinkActive="active"
+              class="nav-link">
+              Añadir Producto
             </a>
           </li>
         </ul>
       </nav>
-      <app-list-product></app-list-product>
+      <!-- Router-outlet nombrado para productos -->
+      <router-outlet name="productSection"></router-outlet>
     </div>
 
     <!-- Contenedor de la Tabla de Clientes -->
@@ -21,13 +34,26 @@
       <nav class="navbar navbar-expand-sm bg-dark navbar-dark text-white">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a routerLink="clients" routerLinkActive="active" class="nav-link">
+            <a
+              [routerLink]="[{ outlets: { clientSection: ['clients'] } }]"
+              routerLinkActive="active"
+              class="nav-link">
               Lista de Clientes
+            </a>
+          </li>
+          <li class="nav-item">
+            <a
+              [routerLink]="[{ outlets: { clientSection: ['register-client'] } }]"
+              routerLinkActive="active"
+              class="nav-link">
+              Añadir Cliente
             </a>
           </li>
         </ul>
       </nav>
-      <app-list-client></app-list-client>
+      <!-- Router-outlet nombrado para clientes -->
+      <router-outlet name="clientSection"></router-outlet>
     </div>
+
   </div>
 </div>

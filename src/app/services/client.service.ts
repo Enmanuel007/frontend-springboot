@@ -19,4 +19,9 @@ export class ClientService {
         return this.httpClient.get<Client[]>(`${this.baseURL}`)
       }
 
+        //Crea o añade un nuevo client
+      postClient(client:Client): Observable<Object>{
+        return this.httpClient.post(`${this.baseURL}`, client)
+      }
+
 }

@@ -19,4 +19,9 @@ export class ProductService {
       return this.httpClient.get<Product[]>(`${this.baseURL}`)
     }
 
+      //Crea o añade un nuevo producto
+  registerProduct(product:Product): Observable<Object>{
+    return this.httpClient.post(`${this.baseURL}`, product)
+  }
+
 }
