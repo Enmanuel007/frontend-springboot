@@ -1,10 +1,32 @@
-<h1 class="text-center">{{title}}</h1>
+<h1 class="text-center">{{ title }}</h1>
+
 <div class="main">
   <div class="tables-container">
+    <!-- Contenedor de la Tabla de Productos -->
     <div class="table-section">
+      <nav class="navbar navbar-expand-sm bg-dark navbar-dark text-white">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a routerLink="products" routerLinkActive="active" class="nav-link">
+              Lista de Productos
+            </a>
+          </li>
+        </ul>
+      </nav>
       <app-list-product></app-list-product>
     </div>
+
+    <!-- Contenedor de la Tabla de Clientes -->
     <div class="table-section">
+      <nav class="navbar navbar-expand-sm bg-dark navbar-dark text-white">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a routerLink="clients" routerLinkActive="active" class="nav-link">
+              Lista de Clientes
+            </a>
+          </li>
+        </ul>
+      </nav>
       <app-list-client></app-list-client>
     </div>
   </div>
