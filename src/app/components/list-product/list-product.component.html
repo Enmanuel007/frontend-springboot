@@ -12,12 +12,12 @@
     </thead>
 
     <tbody >
-        <tr>
-            <td>Descripción</td>
-            <td>Precio</td>
-            <td>Cantidad</td>
-            <td>Nombre</td>
-            <td>Foto</td>
+        <tr *ngFor = "let product of products">
+            <td>{{product.name}}</td>
+            <td>{{product.description}}</td>
+            <td>{{product.price}}</td>
+            <td>{{product.quantity}}</td>
+            <td>{{product.picture}}</td>
         </tr>
     </tbody>
 
