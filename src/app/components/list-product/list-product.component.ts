@@ -20,7 +20,8 @@ export class ListProductComponent implements OnInit {
       price: 2500000,
       quantity:5,
       picture: "pc"
-    }]
+    },
+  ]
   }
 
 }

@@ -1,1 +1,21 @@
-/* You can add global styles to this file, and also import other style files */
+.main {
+    display: flex;
+    padding: 1rem;
+  }
+  
+  .tables-container {
+    display: flex;
+    flex-direction: row; 
+    gap: 20px; 
+    width: 100%; 
+  }
+  
+  .table-section {
+    flex: 1; 
+    height: 400px; 
+    overflow-y: auto; 
+    border: 1px solid #ddd;
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+  }
+  
