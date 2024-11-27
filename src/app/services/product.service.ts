@@ -20,8 +20,23 @@ export class ProductService {
     }
 
       //Crea o añade un nuevo producto
-  registerProduct(product:Product): Observable<Object>{
-    return this.httpClient.post(`${this.baseURL}`, product)
-  }
+    registerProduct(product:Product): Observable<Object>{
+      return this.httpClient.post(`${this.baseURL}`, product)
+    }
+
+    //Buscar un producto por id
+    getProductById(id:number):Observable<Product>{
+      return this.httpClient.get<Product>(`${this.baseURL}/${id}`)
+   }
+
+    //Actualiza un producto
+    updateProduct(id:number, product:Product):Observable<Product>{
+       return this.httpClient.put<Product>(`${this.baseURL}`, product)
+    }
+
+    //Eliminar un producto
+    deleteProduct(id:number):Observable<Object>{
+      return this.httpClient.delete(`${this.baseURL}/${id}`)
+   }
 
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Client } from 'src/app/class/client';
 import { ClientService } from 'src/app/services/client.service';
 
@@ -11,7 +12,8 @@ export class ListClientComponent implements OnInit {
 
   clients : Client[]
   constructor(
-    private clientsService:   ClientService
+    private clientsService:   ClientService,
+    private router:Router
   ) { }
 
   ngOnInit(): void {
@@ -31,5 +33,20 @@ export class ListClientComponent implements OnInit {
       res => {this.clients = res}
     )
   }
+
+  //Actualizar un cliente
+  updateClients(id: number){
+    this.router.navigate([{ outlets: { clientSection: ['update-client', id] } }]);
+  }
+
+
+  //Eliminar un cliente
+  deleteClient(id:number){
+    this.clientsService.deleteClient(id).subscribe(
+     res => {
+       console.log(res) 
+       this.getClients()
+     })
+ }
 
 }

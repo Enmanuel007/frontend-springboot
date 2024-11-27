@@ -4,12 +4,16 @@ import { ListProductComponent } from './components/list-product/list-product.com
 import { ListClientComponent } from './components/list-client/list-client.component';
 import { RegisterProductComponent } from './components/register-product/register-product.component';
 import { RegisterClientComponent } from './components/register-client/register-client.component';
+import { UpdateProductComponent } from './components/update-product/update-product.component';
+import { UpdateClientComponent } from './components/update-client/update-client.component';
 
 const routes: Routes = [
   { path: 'products', component: ListProductComponent, outlet: 'productSection' },
   { path: 'register-product', component: RegisterProductComponent, outlet: 'productSection' },
+  { path: 'update-product', component: UpdateProductComponent, outlet: 'productSection' },
   { path: 'clients', component: ListClientComponent, outlet: 'clientSection' },
   { path: 'register-client', component: RegisterClientComponent, outlet: 'clientSection' },
+  { path: 'update-client', component: UpdateClientComponent, outlet: 'clientSection' },
   { path: '', redirectTo: '/(productSection:products//clientSection:clients)', pathMatch: 'full' },
   // {path: '', redirectTo: 'product', pathMatch: 'full'},
   // { path: '**', redirectTo: '/product' },

@@ -7,6 +7,7 @@
             <th>Apellido</th>
             <th>Correo</th>
             <th>Teléfono</th>
+            <th>Acciones</th>
         </tr>
     </thead>
 
@@ -16,6 +17,10 @@
             <td>{{client.lastName}}</td>
             <td>{{client.email}}</td>
             <td>{{client.phone}}</td>
+            <td> 
+                <!-- <button (click)="updateClient(client.id)" class="btn btn-info">Editar</button> -->
+                <button (click)="deleteClient(client.id)" class="btn btn-danger">Eliminar</button>
+            </td>
         </tr>
     </tbody>
 
