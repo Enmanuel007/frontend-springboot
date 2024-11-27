@@ -1,77 +1,58 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Product } from 'src/app/class/product';
 import { ProductService } from 'src/app/services/product.service';
 
 @Component({
   selector: 'app-update-product',
   templateUrl: './update-product.component.html',
-  styleUrls: ['./update-product.component.css']
+  styleUrls: ['./update-product.component.css'],
 })
 export class UpdateProductComponent implements OnInit {
-
-  product: Product = new Product();  // Inicializa el producto vacío
+  id: number; // ID del producto
+  product: Product = new Product(); // Modelo del producto
 
   constructor(
     private productService: ProductService,
-    private router: Router,
-    private activatedRoute: ActivatedRoute
-  ) { }
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
-    // this.obtenerProducto();  // Llamada para obtener el producto cuando se inicializa el componente
+    // Obtener el ID desde la ruta
+    this.id = this.route.snapshot.params['id'];
+
+    // Cargar el producto desde el servicio
+    this.productService.getProductById(this.id).subscribe({
+      next: (data) => {
+        this.product = data;
+      },
+      error: (err) => {
+        console.error('Error al cargar el producto:', err);
+      },
+    });
   }
 
-  /**
-   * Obtiene el producto a través del parámetro 'id' en la ruta activa
-   */
-  // obtenerProducto(): void {
-  //   this.activatedRoute.paramMap.subscribe(params => {
-  //     const productId = params.get('id');  // Obtener el 'id' desde la URL
-  //     if (productId) {
-  //       this.productService.getProductById(productId).subscribe({
-  //         next: (res) => {
-  //           console.log('Producto obtenido con éxito:', res);
-  //           this.product = res;  // Asigna el producto obtenido al objeto 'product'
-  //         },
-  //         error: (err) => {
-  //           console.error('Error al obtener el producto:', err);
-  //         }
-  //       });
-  //     } else {
-  //       console.error('No se encontró el id del producto en la URL');
-  //     }
-  //   });
-  // }
+  // Actualizar el producto
+  updateProduct(): void {
+    this.productService.updateProduct(this.id, this.product).subscribe({
+      next: () => {
+        console.log('Producto actualizado');
+        this.goToListProducts();
+      },
+      error: (err) => {
+        console.error('Error al actualizar el producto:', err);
+      },
+    });
+  }
 
-  // /**
-  //  * Actualiza el producto utilizando el servicio de ProductService
-  //  */
-  // actualizarProducto(): void {
-  //   this.productService.updateProduct(this.product).subscribe({
-  //     next: (res) => {
-  //       console.log('Producto actualizado con éxito:', res);
-  //       this.redirigirListaProducto();  // Redirige a la lista de productos después de la actualización
-  //     },
-  //     error: (err) => {
-  //       console.error('Error al actualizar el producto:', err);
-  //     }
-  //   });
-  // }
+  // Redirigir al listado de productos
+  goToListProducts(): void {
+    this.router.navigate([{ outlets: { productSection: ['products'] } }]);
+  }
 
-  // /**
-  //  * Redirige a la lista de productos
-  //  */
-  // redirigirListaProducto(): void {
-  //   this.router.navigate([{ outlets: { productSection: ['products'] } }]);  // Redirige a la lista de productos
-  // }
-
-  // /**
-  //  * Maneja el envío del formulario
-  //  */
-  // onSubmit(): void {
-  //   console.log('Datos del producto enviados:', this.product);
-  //   this.actualizarProducto();  // Llama al servicio para actualizar el producto
-  // }
-
+  // Manejo del formulario
+  onSubmit(): void {
+    this.updateProduct();
+  }
 }

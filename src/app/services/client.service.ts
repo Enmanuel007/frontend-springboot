@@ -32,7 +32,8 @@ export class ClientService {
 
        //Actualiza un cliente
        updateClient(id:number, client:Client):Observable<Client>{
-        return this.httpClient.put<Client>(`${this.baseURL}`, client)
+        return this.httpClient.put<Client>(`${this.baseURL}/${id}`, client);
+
        }
 
        //Eliminar un producto

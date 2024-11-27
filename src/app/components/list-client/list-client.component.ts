@@ -6,47 +6,44 @@ import { ClientService } from 'src/app/services/client.service';
 @Component({
   selector: 'app-list-client',
   templateUrl: './list-client.component.html',
-  styleUrls: ['./list-client.component.css']
+  styleUrls: ['./list-client.component.css'],
 })
 export class ListClientComponent implements OnInit {
+  clients: Client[] = [];
 
-  clients : Client[]
-  constructor(
-    private clientsService:   ClientService,
-    private router:Router
-  ) { }
+  constructor(private clientService: ClientService, private router: Router) {}
 
   ngOnInit(): void {
-    // this.clients = [{
-    //   id:1,
-    //   name: "Ema",
-    //   lastName: "Ochoa",
-    //   email: "eochoa@gmail.com",
-    //   phone: "1234"
-    // }]
-
-    this.getClients()
+    this.getClients();
   }
 
-  private getClients(){
-    this.clientsService.getAllClients().subscribe(
-      res => {this.clients = res}
-    )
+  // Método para obtener todos los clientes
+  getClients(): void {
+    this.clientService.getAllClients().subscribe({
+      next: (data) => {
+        this.clients = data;
+      },
+      error: (err) => {
+        console.error('Error al cargar clientes:', err);
+      },
+    });
   }
 
-  //Actualizar un cliente
-  updateClients(id: number){
+  // Método público para navegar a la edición
+  navigateToUpdateClient(id: number): void {
     this.router.navigate([{ outlets: { clientSection: ['update-client', id] } }]);
   }
 
-
-  //Eliminar un cliente
-  deleteClient(id:number){
-    this.clientsService.deleteClient(id).subscribe(
-     res => {
-       console.log(res) 
-       this.getClients()
-     })
- }
-
+  // Método para eliminar un cliente
+  deleteClient(id: number): void {
+    this.clientService.deleteClient(id).subscribe({
+      next: () => {
+        console.log('Cliente eliminado');
+        this.getClients(); // Refrescar la lista
+      },
+      error: (err) => {
+        console.error('Error al eliminar cliente:', err);
+      },
+    });
+  }
 }
